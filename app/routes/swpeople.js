@@ -21,7 +21,7 @@ var config = {
     } 
 }
 let page = ''
-router.get('/', (req, res, next) => {
+router.get('/People', (req, res, next) => {
     axios(config)
         .then(function(response) {
             //console.log('Response data:\n', JSON.stringify(response.data))

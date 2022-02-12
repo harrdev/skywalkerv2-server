@@ -1,12 +1,9 @@
-// require necessary NPM packages
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-
-// require route files
-const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
-const swdata = require('./app/routes/swdata')
+const swpeople = require('./app/routes/swpeople')
+const swplanets = require('./app/routes/swplanets')
 // require middleware
 const errorHandler = require('./lib/error_handler')
 const replaceToken = require('./lib/replace_token')
@@ -65,9 +62,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // register route files
-app.use(exampleRoutes)
 app.use(userRoutes)
-app.use(swdata)
+app.use(swpeople)
+app.use(swplanets)
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them
@@ -76,10 +73,9 @@ app.use(errorHandler)
 app.get('/', (req, res) => {
 	res.send("Home Route")
 })
-// run API on designated port (4741 in this case)
+
 app.listen(port, () => {
 	console.log('listening on port ' + port)
 })
 
-// needed for testing
 module.exports = app
