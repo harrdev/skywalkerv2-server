@@ -6,6 +6,8 @@ const swpeople = require('./app/routes/swpeople')
 const swplanets = require('./app/routes/swplanets')
 const swvehicles = require('./app/routes/swvehicles')
 const swspecies = require('./app/routes/swspecies')
+const swstarships = require ('./app/routes/swstarships')
+const swfilms = require ('./app/routes/swfilms')
 // require middleware
 const errorHandler = require('./lib/error_handler')
 const replaceToken = require('./lib/replace_token')
@@ -69,6 +71,8 @@ app.use(swpeople)
 app.use(swplanets)
 app.use(swvehicles)
 app.use(swspecies)
+app.use(swstarships)
+app.use(swfilms)
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them
