@@ -13,7 +13,7 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-var config = {
+const config = {
     method: 'GET',
     url: 'http://swapi.dev/api/people',
     headers: {
