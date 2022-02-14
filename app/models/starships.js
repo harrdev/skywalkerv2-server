@@ -1,68 +1,56 @@
 const mongoose = require('mongoose')
 
-const peopleSchema = new mongoose.Schema(
+const StarshipsSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: false,
+			required: true,
 		},
-		height: {
+		model: {
 			type: String,
 			required: false,
 		},
-        mass: {
+        manufacturer: {
 			type: String,
 			required: false,
 		},
-        hairColor: {
+        cost: {
 			type: String,
 			required: false,
 		},
-        skinColor: {
+        length: {
 			type: String,
 			required: false,
 		},
-        eyeColor: {
+        maxSpeed: {
 			type: String,
 			required: false,
 		},
-        birthYear: {
+        crew: {
 			type: String,
 			required: false,
 		},
-        deathYear: {
+        passengers: {
             type: String,
             required: false,
         },
-        gender: {
+        cargoCapacity: {
 			type: String,
 			required: false,
 		},
-        affiliations: {
-            type: Array,
-            required: false,
-        },
-        species: {
+        consumables: {
             type: String,
             required: false,
         },
-        image: {
+        hyperdriveRating: {
             type: String,
             required: false,
         },
-        bornLocation: {
+        mglt: {
             type: String,
             required: false,
         },
-        deathLocation: {
-            type: String,
-            required: false,
-        },
-        wiki: {
-            type: String,
-            required: false,
-        },
-        homeworld: {
+        starshipClass: {
             type: String,
             required: false,
         },
@@ -77,4 +65,4 @@ const peopleSchema = new mongoose.Schema(
 	}
 )
 
-module.exports = mongoose.model('People', peopleSchema)
+module.exports = mongoose.model('Starships', starshipsSchema)
