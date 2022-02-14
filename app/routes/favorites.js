@@ -47,13 +47,9 @@ router.get('/saved', requireToken, (req, res, next) => {
     Saved.find()
         .then((people) => {
             const userPeople = people.filter(person => person.owner.toString() === req.user.id)
-            // console.log("Fave person owner is: ", person)
-            console.log("People id: ", person.owner)
-            console.log("User people: ", people)
-            console.log("Logged in user is: ", req.user.id)
             return userPeople.map((person) => person.toObject())
         })
-        // respond with status 200 and JSON of the saved coins
+        // respond with status 200 and JSON of the saved people
         .then((people) => res.status(200).json({ people: people }))
         // if an error occurs, pass it to the handler
         .catch(next)
