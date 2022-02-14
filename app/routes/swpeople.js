@@ -14,25 +14,25 @@ const router = express.Router()
 
 router.post('/People', requireToken, (req, res, next) => {
 	console.log("Server-side POST Route hit")
-	console.log("Req.body: ", req.body)
+	console.log("Req.body: ", req.body.info.name)
 	req.body.owner = req.user.id
 	Saved.create({
-		name: req.body.name,
-		eyeColor: req.body.eyeColor,
-		hairColor: req.body.hairColor,
-		skinColor: req.body.skinColor,
-		mass: req.body.mass,
-		height: req.body.height,
-		affiliations: req.body.affiliations,
-		born: req.body.born,
-		died: req.body.died,
-		species: req.body.species,
-		deathLocation: req.body.deathLocation,
-		bornLocation: req.body.bornLocation,
-		image: req.body.image,
-		wiki: req.body.wiki,
-		homeworld: req.body.homeworld,
-		gender: req.body.gender,
+		name: req.body.info.name,
+		eyeColor: req.body.info.eyeColor,
+		hairColor: req.body.info.hairColor,
+		skinColor: req.body.info.skinColor,
+		mass: req.body.info.mass,
+		height: req.body.info.height,
+		affiliations: req.body.info.affiliations,
+		born: req.body.info.born,
+		died: req.body.info.died,
+		species: req.body.info.species,
+		deathLocation: req.body.info.deathLocation,
+		bornLocation: req.body.info.bornLocation,
+		image: req.body.info.image,
+		wiki: req.body.info.wiki,
+		homeworld: req.body.info.homeworld,
+		gender: req.body.info.gender,
 		owner: req.body.owner
 	})
 		.then(addedPerson => {
