@@ -12,10 +12,10 @@ const Saved = require('../models/people')
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
-router.post('/People', (req, res, next) => {
+router.post('/People', requireToken, (req, res, next) => {
 	console.log("Server-side POST Route hit")
 	console.log("Req.body: ", req.body)
-	// req.body.req.body.owner = req.user.id
+	req.body.owner = req.user.id
 	Saved.create({
 		name: req.body.name,
 		eyeColor: req.body.eyeColor,
