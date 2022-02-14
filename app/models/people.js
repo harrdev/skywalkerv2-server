@@ -4,41 +4,73 @@ const peopleSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		height: {
 			type: String,
-			required: true,
+			required: false,
 		},
         mass: {
 			type: String,
-			required: true,
+			required: false,
 		},
-        hair_color: {
+        hairColor: {
 			type: String,
-			required: true,
+			required: false,
 		},
-        skin_color: {
+        skinColor: {
 			type: String,
-			required: true,
+			required: false,
 		},
-        eye_color: {
+        eyeColor: {
 			type: String,
-			required: true,
+			required: false,
 		},
-        birth_year: {
+        birthYear: {
 			type: String,
-			required: true,
+			required: false,
 		},
+        deathYear: {
+            type: String,
+            required: false,
+        },
         gender: {
 			type: String,
-			required: true,
+			required: false,
 		},
-		owner: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User',
-			required: true,
-		},
+        affiliations: {
+            type: Array,
+            required: false,
+        },
+        species: {
+            type: String,
+            required: false,
+        },
+        image: {
+            type: String,
+            required: false,
+        },
+        bornLocation: {
+            type: String,
+            required: false,
+        },
+        deathLocation: {
+            type: String,
+            required: false,
+        },
+        wiki: {
+            type: String,
+            required: false,
+        },
+        homeworld: {
+            type: String,
+            required: false,
+        },
+		// owner: {
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'User',
+		// 	required: true,
+		// },
 	},
 	{
 		timestamps: true,

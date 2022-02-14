@@ -12,24 +12,4 @@ const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
-// INDEX
-var config = {
-    method: 'GET',
-    url: 'http://swapi.dev/api/species',
-    headers: {
-        "Authorization": `Bearer ${process.env.API_KEY}`
-    } 
-}
-let page = ''
-router.get('/Species', (req, res, next) => {
-    axios(config)
-        .then(function(response) {
-            //console.log('Response data:\n', JSON.stringify(response.data))
-            console.log(res.json(response.data))
-        })
-        .catch(function (error) {
-            console.log(error);
-        })   
-})
-
 module.exports = router

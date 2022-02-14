@@ -8,28 +8,37 @@ const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
 const requireToken = passport.authenticate('bearer', { session: false })
-
+const Saved = require('../models/people')
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
-// INDEX
-let config = {
-    method: 'GET',
-    url: 'http://swapi.dev/api/people',
-    headers: {
-        "Authorization": `Bearer ${process.env.API_KEY}`
-    } 
-}
-
-router.get('/People', (req, res, next) => {
-    axios(config)
-        .then(function(response) {
-            //console.log('Response data:\n', JSON.stringify(response.data))
-            console.log(res.json(response.data))
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+router.post('/People', (req, res, next) => {
+	console.log("Server-side POST Route hit")
+	console.log("Req.body: ", req.body)
+	// req.body.req.body.owner = req.user.id
+	Saved.create({
+		name: req.body.name,
+		eyeColor: req.body.eyeColor,
+		hairColor: req.body.hairColor,
+		skinColor: req.body.skinColor,
+		mass: req.body.mass,
+		height: req.body.height,
+		affiliations: req.body.affiliations,
+		born: req.body.born,
+		died: req.body.died,
+		species: req.body.species,
+		deathLocation: req.body.deathLocation,
+		bornLocation: req.body.bornLocation,
+		image: req.body.image,
+		wiki: req.body.wiki,
+		homeworld: req.body.homeworld,
+		gender: req.body.gender,
+		owner: req.body.owner
+	})
+		.then(addedPerson => {
+			console.log("Added :", addedPerson)
+			res.json({ message: "Person Added", addedPerson })
+		})
+		.catch(next)
 })
-
 module.exports = router
