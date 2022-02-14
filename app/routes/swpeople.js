@@ -13,9 +13,8 @@ const Saved = require('../models/people')
 const router = express.Router()
 
 router.post('/People', requireToken, (req, res, next) => {
-	console.log("Server-side POST Route hit")
-	console.log("Req.body: ", req.body.info.name)
 	req.body.owner = req.user.id
+	console.log("This is the res: ", req.body.info.name)
 	Saved.create({
 		name: req.body.info.name,
 		eyeColor: req.body.info.eyeColor,
@@ -41,4 +40,29 @@ router.post('/People', requireToken, (req, res, next) => {
 		})
 		.catch(next)
 })
+
+// GET Route for Favorited People
+router.get('/saved', requireToken, (req, res, next) => {
+	Saved.find()
+		.then((people) => {
+			const userPeople = people.filter(person => person.owner.toString() === req.user.id)
+			return userPeople.map((person) => person.toObject())
+		})
+		.then((people) => res.status(200).json({ people: people }))
+		.catch(next)
+})
+
+// DELETE Route for favorited people
+router.delete('/saved/:id', (req, res, next) => {
+	Saved.findOneAndDelete({
+		_id: req.params.id
+	})
+		.then(deletedPerson => {
+			res.json({ message: "Deleted Person", deletedPerson })
+		})
+		.catch(err => {
+			console.log('Failed to delete: ', err)
+		})
+})
+
 module.exports = router

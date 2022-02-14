@@ -7,37 +7,55 @@ const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
+const Saved = require('../models/planets')
 const requireToken = passport.authenticate('bearer', { session: false })
 
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
-router.post('/People', requireToken, (req, res, next) => {
-	console.log("Server-side POST Route hit")
-	console.log("Req.body: ", req.body)
-	req.body.owner = req.user.id
-	Saved.create({
-		name: req.body.name,
-		eyeColor: req.body.eyeColor,
-		hairColor: req.body.hairColor,
-		skinColor: req.body.skinColor,
-		mass: req.body.mass,
-		height: req.body.height,
-		affiliations: req.body.affiliations,
-		born: req.body.born,
-		died: req.body.died,
-		species: req.body.species,
-		deathLocation: req.body.deathLocation,
-		bornLocation: req.body.bornLocation,
-		image: req.body.image,
-		wiki: req.body.wiki,
-		homeworld: req.body.homeworld,
-		gender: req.body.gender,
-		owner: req.body.owner
-	})
-		.then(addedPerson => {
-			console.log("Added :", addedPerson)
-			res.json({ message: "Person Added", addedPerson })
+
+router.get('/FavePlanets', requireToken, (req, res, next) => {
+	Saved.find()
+		.then((planets) => {
+			const userPlanet = planets.filter(planet => planet.owner.toString() === req.user.id)
+			return userPlanet.map((planet) => planet.toObject())
 		})
+		.then((planet) => res.status(200).json({ planet: planet }))
 		.catch(next)
 })
+
+router.delete('/FavePlanets/:id', (req, res, next) => {
+	Saved.findOneAndDelete({
+		_id: req.params.id
+	})
+		.then(deletedPlanet => {
+			res.json({ message: "Deleted Planet", deletedPlanet })
+		})
+		.catch(err => {
+			console.log('Failed to delete: ', err)
+		})
+})
+
+router.post('/Planets', requireToken, (req, res, next) => {
+    console.log("Server-side POST Route hit")
+    console.log("Req.body: ", req.body)
+    req.body.owner = req.user.id
+    Saved.create({
+        name: req.body.info.name,
+        rotationPeriod: req.body.info.rotation_period,
+        orbitalPeriod: req.body.info.orbitalPeriod,
+        diameter: req.body.info.diameter,
+        terrain: req.body.info.terrain,
+        climate: req.body.info.climate,
+        gravity: req.body.info.gravity,
+        surfaceWater: req.body.info.surface_water,
+        population: req.body.info.population,
+        owner: req.body.owner
+    })
+        .then(addedPlanet => {
+            console.log("Added :", addedPlanet)
+            res.json({ message: "Planet Added", addedPlanet })
+        })
+        .catch(next)
+})
+
 module.exports = router
