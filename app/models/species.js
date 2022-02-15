@@ -11,23 +11,23 @@ const speciesSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        averageHeight: {
+        average_height: {
 			type: String,
 			required: false,
 		},
-        skinColor: {
+        skin_colors: {
 			type: String,
 			required: false,
 		},
-        hairColor: {
+        hair_colors: {
 			type: String,
 			required: false,
 		},
-        eyeColor: {
+        eye_colors: {
 			type: String,
 			required: false,
 		},
-        averageLifespan: {
+        average_lifespan: {
 			type: String,
 			required: false,
 		},
@@ -35,7 +35,7 @@ const speciesSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        peopleOfSpecies: {
+        people: {
 			type: Array,
 			required: false,
 		},

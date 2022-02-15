@@ -40,11 +40,11 @@ router.post('/Species', requireToken, (req, res, next) => {
     req.body.owner = req.user.id
     Saved.create({
         name: req.body.info.name,
-        averageHeight: req.body.info.average_height,
-        skinColors: req.body.info.skin_colors,
-        hairColors: req.body.info.hair_colors,
-        eyeColors: req.body.info.eye_colors,
-        averageLifespan: req.body.info.average_lifespan,
+        average_height: req.body.info.average_height,
+        skin_colors: req.body.info.skin_colors,
+        hair_colors: req.body.info.hair_colors,
+        eye_colors: req.body.info.eye_colors,
+        average_lifespan: req.body.info.average_lifespan,
         language: req.body.info.language,
         owner: req.body.owner
     })

@@ -15,7 +15,7 @@ const vehiclesSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        cost: {
+        cost_in_credits: {
 			type: String,
 			required: false,
 		},
@@ -27,7 +27,7 @@ const vehiclesSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        maxSpeed: {
+        max_atmosphering_speed: {
 			type: String,
 			required: false,
 		},
@@ -35,7 +35,7 @@ const vehiclesSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        cargoCapacity: {
+        cargo_capacity: {
 			type: String,
 			required: false,
 		},
@@ -43,7 +43,7 @@ const vehiclesSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        vehicleClass: {
+        vehicle_class: {
             type: String,
             required: false,
         },

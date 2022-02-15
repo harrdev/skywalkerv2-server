@@ -42,16 +42,16 @@ router.post('/Starships', requireToken, (req, res, next) => {
         name: req.body.info.name,
         model: req.body.info.model,
         manufacturer: req.body.info.manufacturer,
-        costInCredits: req.body.info.costInCredits,
+        cost_in_credits: req.body.info.cost_in_credits,
         length: req.body.info.length,
         crew: req.body.info.crew,
-        maxSpeed: req.body.info.max_atmosphering_speed,
+        max_atmosphering_speed: req.body.info.max_atmosphering_speed,
         passengers: req.body.info.passengers,
-        cargoCapacity: req.body.info.cargo_capacity,
+        cargo_capacity: req.body.info.cargo_capacity,
         consumables: req.body.info.consumables,
-        starshipClass: req.body.info.starship_class,
-        mglt: req.body.info.mglt,
-        hyperdriveRating: req.body.info.hyperdrive_rating,
+        starship_class: req.body.info.starship_class,
+        MGLT: req.body.info.MGLT,
+        hyperdrive_rating: req.body.info.hyperdrive_rating,
         owner: req.body.owner
     })
         .then(addedStarships => {

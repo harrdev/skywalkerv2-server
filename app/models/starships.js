@@ -15,7 +15,7 @@ const starshipsSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        cost: {
+        cost_in_credits: {
 			type: String,
 			required: false,
 		},
@@ -23,7 +23,7 @@ const starshipsSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        maxSpeed: {
+        max_atmosphering_speed: {
 			type: String,
 			required: false,
 		},
@@ -35,7 +35,7 @@ const starshipsSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        cargoCapacity: {
+        cargo_capacity: {
 			type: String,
 			required: false,
 		},
@@ -43,15 +43,15 @@ const starshipsSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        hyperdriveRating: {
+        hyperdrive_rating: {
             type: String,
             required: false,
         },
-        mglt: {
+        MGLT: {
             type: String,
             required: false,
         },
-        starshipClass: {
+        starship_class: {
             type: String,
             required: false,
         },

@@ -7,11 +7,11 @@ const FilmsSchema = new mongoose.Schema(
 			required: true,
             unique: true,
 		},
-		episodeId: {
+		episode_id: {
 			type: String,
 			required: false,
 		},
-        openingCrawl: {
+        opening_crawl: {
 			type: String,
 			required: false,
 		},
@@ -23,7 +23,7 @@ const FilmsSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        releaseDate: {
+        release_date: {
 			type: String,
 			required: false,
 		},

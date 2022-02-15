@@ -40,11 +40,11 @@ router.post('/Films', requireToken, (req, res, next) => {
     req.body.owner = req.user.id
     Saved.create({
         title: req.body.info.title,
-        episodeId: req.body.info.episode_id,
-        openingCrawl: req.body.info.openingCrawl,
+        episode_id: req.body.info.episode_id,
+        opening_crawl: req.body.info.opening_crawl,
         director: req.body.info.director,
         producer: req.body.info.producer,
-        releaseDate: req.body.info.releaseDate,
+        release_date: req.body.info.release_date,
         owner: req.body.owner
     })
         .then(addedFilm => {
