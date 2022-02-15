@@ -22,7 +22,7 @@ router.get('/FaveSpecies', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-router.delete('/FaveSpecies/:id', (req, res, next) => {
+router.delete('/FaveSpecies/:id', requireToken, (req, res, next) => {
 	Saved.findOneAndDelete({
 		_id: req.params.id
 	})

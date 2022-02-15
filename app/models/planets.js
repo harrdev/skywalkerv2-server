@@ -5,6 +5,7 @@ const planetsSchema = new mongoose.Schema(
 		name: {
 			type: String,
 			required: true,
+            unique: true,
 		},
 		rotationPeriod: {
 			type: String,

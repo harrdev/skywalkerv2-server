@@ -53,7 +53,7 @@ router.get('/saved', requireToken, (req, res, next) => {
 })
 
 // DELETE Route for favorited people
-router.delete('/saved/:id', (req, res, next) => {
+router.delete('/saved/:id', requireToken, (req, res, next) => {
 	Saved.findOneAndDelete({
 		_id: req.params.id
 	})
