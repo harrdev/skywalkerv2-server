@@ -8,8 +8,51 @@ const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
 const requireToken = passport.authenticate('bearer', { session: false })
-
+const Saved = require('../models/species')
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
+
+router.get('/FaveSpecies', requireToken, (req, res, next) => {
+	Saved.find()
+		.then((species) => {
+			const userSpecies = species.filter(species => species.owner.toString() === req.user.id)
+			return userSpecies.map((species) => species.toObject())
+		})
+		.then((species) => res.status(200).json({ species: species }))
+		.catch(next)
+})
+
+router.delete('/FaveSpecies/:id', (req, res, next) => {
+	Saved.findOneAndDelete({
+		_id: req.params.id
+	})
+		.then(deletedSpecies => {
+			res.json({ message: "Deleted Species", deletedSpecies })
+		})
+		.catch(err => {
+			console.log('Failed to delete: ', err)
+		})
+})
+
+router.post('/Species', requireToken, (req, res, next) => {
+    console.log("Server-side POST Route hit")
+    console.log("Req.body: ", req.body)
+    req.body.owner = req.user.id
+    Saved.create({
+        name: req.body.info.name,
+        averageHeight: req.body.info.average_height,
+        skinColors: req.body.info.skin_colors,
+        hairColors: req.body.info.hair_colors,
+        eyeColors: req.body.info.eye_colors,
+        averageLifespan: req.body.info.average_lifespan,
+        language: req.body.info.language,
+        owner: req.body.owner
+    })
+        .then(addedSpecies => {
+            console.log("Added :", addedSpecies)
+            res.json({ message: "Species Added", addedSpecies })
+        })
+        .catch(next)
+})
 
 module.exports = router
