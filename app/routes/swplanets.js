@@ -14,25 +14,47 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 router.get('/FavePlanets', requireToken, (req, res, next) => {
-	Saved.find()
-		.then((planets) => {
-			const userPlanet = planets.filter(planet => planet.owner.toString() === req.user.id)
-			return userPlanet.map((planet) => planet.toObject())
-		})
-		.then((planet) => res.status(200).json({ planet: planet }))
-		.catch(next)
+    Saved.find()
+        .then((planets) => {
+            const userPlanet = planets.filter(planet => planet.owner.toString() === req.user.id)
+            return userPlanet.map((planet) => planet.toObject())
+        })
+        .then((planet) => res.status(200).json({ planet: planet }))
+        .catch(next)
+})
+
+router.patch('/Planets/:id', requireToken, (req, res, next) => {
+    Saved.findOneAndUpdate({
+        "_id": req.params.id
+    }, {
+        "$set": {
+            name: req.body.info.name,
+            rotation_period: req.body.info.rotation_period,
+            orbital_period: req.body.info.orbital_period,
+            diameter: req.body.info.diameter,
+            terrain: req.body.info.terrain,
+            climate: req.body.info.climate,
+            gravity: req.body.info.gravity,
+            surface_water: req.body.info.surface_water,
+            population: req.body.info.population
+        }
+    })
+        // .then(handle404)
+        .then(() => res.sendStatus(204))
+        // if an error occurs, pass it to the handler
+        .catch(next)
 })
 
 router.delete('/FavePlanets/:id', requireToken, (req, res, next) => {
-	Saved.findOneAndDelete({
-		_id: req.params.id
-	})
-		.then(deletedPlanet => {
-			res.json({ message: "Deleted Planet", deletedPlanet })
-		})
-		.catch(err => {
-			console.log('Failed to delete: ', err)
-		})
+    Saved.findOneAndDelete({
+        _id: req.params.id
+    })
+        .then(deletedPlanet => {
+            res.json({ message: "Deleted Planet", deletedPlanet })
+        })
+        .catch(err => {
+            console.log('Failed to delete: ', err)
+        })
 })
 
 router.post('/Planets', requireToken, (req, res, next) => {
