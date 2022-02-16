@@ -7,11 +7,11 @@ const planetsSchema = new mongoose.Schema(
 			required: true,
             unique: true,
 		},
-		rotationPeriod: {
+		rotation_period: {
 			type: String,
 			required: false,
 		},
-        orbitalPeriod: {
+        orbital_period: {
 			type: String,
 			required: false,
 		},
@@ -35,7 +35,7 @@ const planetsSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        surfaceWater: {
+        surface_water: {
 			type: String,
 			required: false,
 		},

@@ -14,6 +14,35 @@ const router = express.Router()
 
 router.post('/People', requireToken, (req, res, next) => {
 	req.body.owner = req.user.id
+	console.log("This is the res: ", req.body.info)
+	Saved.create({
+		name: req.body.info.name,
+		eyeColor: req.body.info.eyeColor,
+		hairColor: req.body.info.hairColor,
+		skinColor: req.body.info.skinColor,
+		mass: req.body.info.mass,
+		height: req.body.info.height,
+		affiliations: req.body.info.affiliations,
+		born: req.body.info.born,
+		died: req.body.info.died,
+		species: req.body.info.species,
+		diedLocation: req.body.info.diedLocation,
+		bornLocation: req.body.info.bornLocation,
+		image: req.body.info.image,
+		wiki: req.body.info.wiki,
+		homeworld: req.body.info.homeworld,
+		gender: req.body.info.gender,
+		owner: req.body.owner
+	})
+		.then(addedPerson => {
+			console.log("Added :", addedPerson)
+			res.json({ message: "Person Added", addedPerson })
+		})
+		.catch(next)
+})
+
+router.post('/newPerson/People', requireToken, (req, res, next) => {
+	req.body.owner = req.user.id
 	console.log("This is the res: ", req.body.info.name)
 	Saved.create({
 		name: req.body.info.name,
@@ -26,7 +55,7 @@ router.post('/People', requireToken, (req, res, next) => {
 		born: req.body.info.born,
 		died: req.body.info.died,
 		species: req.body.info.species,
-		deathLocation: req.body.info.deathLocation,
+		diedLocation: req.body.info.diedLocation,
 		bornLocation: req.body.info.bornLocation,
 		image: req.body.info.image,
 		wiki: req.body.info.wiki,

@@ -41,13 +41,13 @@ router.post('/Planets', requireToken, (req, res, next) => {
     req.body.owner = req.user.id
     Saved.create({
         name: req.body.info.name,
-        rotationPeriod: req.body.info.rotation_period,
-        orbitalPeriod: req.body.info.orbitalPeriod,
+        rotation_period: req.body.info.rotation_period,
+        orbital_period: req.body.info.orbital_period,
         diameter: req.body.info.diameter,
         terrain: req.body.info.terrain,
         climate: req.body.info.climate,
         gravity: req.body.info.gravity,
-        surfaceWater: req.body.info.surface_water,
+        surface_water: req.body.info.surface_water,
         population: req.body.info.population,
         owner: req.body.owner
     })

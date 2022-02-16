@@ -27,11 +27,11 @@ const peopleSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-        birthYear: {
+        born: {
 			type: String,
 			required: false,
 		},
-        deathYear: {
+        died: {
             type: String,
             required: false,
         },
@@ -55,7 +55,7 @@ const peopleSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        deathLocation: {
+        diedLocation: {
             type: String,
             required: false,
         },
