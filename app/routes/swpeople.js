@@ -81,6 +81,35 @@ router.get('/saved', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
+router.patch('/People/:id', requireToken, (req, res, next) => {
+	Saved.findOneAndUpdate({
+		"_id": req.params.id
+	}, {
+		"$set": {
+			name: req.body.info.name,
+			eyeColor: req.body.info.eyeColor,
+			hairColor: req.body.info.hairColor,
+			skinColor: req.body.info.skinColor,
+			mass: req.body.info.mass,
+			height: req.body.info.height,
+			affiliations: req.body.info.affiliations,
+			born: req.body.info.born,
+			died: req.body.info.died,
+			species: req.body.info.species,
+			diedLocation: req.body.info.diedLocation,
+			bornLocation: req.body.info.bornLocation,
+			image: req.body.info.image,
+			wiki: req.body.info.wiki,
+			homeworld: req.body.info.homeworld,
+			gender: req.body.info.gender
+		}
+	})
+		// .then(handle404)
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
 // DELETE Route for favorited people
 router.delete('/saved/:id', requireToken, (req, res, next) => {
 	Saved.findOneAndDelete({
