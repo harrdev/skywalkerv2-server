@@ -59,4 +59,29 @@ router.post('/Vehicles', requireToken, (req, res, next) => {
         .catch(next)
 })
 
+router.post('/newVehicle/Vehicle', requireToken, (req, res, next) => {
+    console.log("Server-side POST Route hit")
+    console.log("Req.body: ", req.body)
+    req.body.owner = req.user.id
+    Saved.create({
+        name: req.body.info.name,
+        model: req.body.info.model,
+        manufacturer: req.body.info.manufacturer,
+        cost_in_credits: req.body.info.cost_in_credits,
+        length: req.body.info.length,
+        crew: req.body.info.crew,
+        max_atmosphering_speed: req.body.info.max_atmosphering_speed,
+        passengers: req.body.info.passengers,
+        cargo_capacity: req.body.info.cargo_capacity,
+        consumables: req.body.info.consumables,
+        vehicle_class: req.body.info.vehicle_class,
+        owner: req.body.owner
+    })
+        .then(addedVehicles => {
+            console.log("Added :", addedVehicles)
+            res.json({ message: "Vehicles Added", addedVehicles })
+        })
+        .catch(next)
+})
+
 module.exports = router

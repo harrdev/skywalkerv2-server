@@ -58,4 +58,27 @@ router.post('/Planets', requireToken, (req, res, next) => {
         .catch(next)
 })
 
+router.post('/newPlanet/Planet', requireToken, (req, res, next) => {
+    console.log("Server-side POST Route hit")
+    console.log("Req.body: ", req.body)
+    req.body.owner = req.user.id
+    Saved.create({
+        name: req.body.info.name,
+        rotation_period: req.body.info.rotation_period,
+        orbital_period: req.body.info.orbital_period,
+        diameter: req.body.info.diameter,
+        terrain: req.body.info.terrain,
+        climate: req.body.info.climate,
+        gravity: req.body.info.gravity,
+        surface_water: req.body.info.surface_water,
+        population: req.body.info.population,
+        owner: req.body.owner
+    })
+        .then(addedPlanet => {
+            console.log("Added :", addedPlanet)
+            res.json({ message: "Planet Added", addedPlanet })
+        })
+        .catch(next)
+})
+
 module.exports = router

@@ -56,4 +56,26 @@ router.post('/Species', requireToken, (req, res, next) => {
         .catch(next)
 })
 
+router.post('/newSpecies/Species', requireToken, (req, res, next) => {
+    console.log("Server-side POST Route hit")
+    console.log("Req.body: ", req.body)
+    req.body.owner = req.user.id
+    Saved.create({
+        name: req.body.info.name,
+        classification: req.body.info.classification,
+        average_height: req.body.info.average_height,
+        skin_colors: req.body.info.skin_colors,
+        hair_colors: req.body.info.hair_colors,
+        eye_colors: req.body.info.eye_colors,
+        average_lifespan: req.body.info.average_lifespan,
+        language: req.body.info.language,
+        owner: req.body.owner
+    })
+        .then(addedSpecies => {
+            console.log("Added :", addedSpecies)
+            res.json({ message: "Species Added", addedSpecies })
+        })
+        .catch(next)
+})
+
 module.exports = router
