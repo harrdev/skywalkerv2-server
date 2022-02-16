@@ -40,6 +40,7 @@ router.post('/Species', requireToken, (req, res, next) => {
     req.body.owner = req.user.id
     Saved.create({
         name: req.body.info.name,
+        classification: req.body.info.classification,
         average_height: req.body.info.average_height,
         skin_colors: req.body.info.skin_colors,
         hair_colors: req.body.info.hair_colors,
