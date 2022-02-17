@@ -13,25 +13,49 @@ const Saved = require('../models/vehicles')
 const router = express.Router()
 
 router.get('/FaveVehicles', requireToken, (req, res, next) => {
-	Saved.find()
-		.then((vehicles) => {
-			const userVehicles = vehicles.filter(vehicle => vehicle.owner.toString() === req.user.id)
-			return userVehicles.map((vehicles) => vehicles.toObject())
-		})
-		.then((vehicles) => res.status(200).json({ vehicles: vehicles }))
-		.catch(next)
+    Saved.find()
+        .then((vehicles) => {
+            const userVehicles = vehicles.filter(vehicle => vehicle.owner.toString() === req.user.id)
+            return userVehicles.map((vehicles) => vehicles.toObject())
+        })
+        .then((vehicles) => res.status(200).json({ vehicles: vehicles }))
+        .catch(next)
+})
+
+router.patch('/Vehicles/:id', requireToken, (req, res, next) => {
+    Saved.findOneAndUpdate({
+        "_id": req.params.id
+    }, {
+        "$set": {
+            name: req.body.info.name,
+            model: req.body.info.model,
+            manufacturer: req.body.info.manufacturer,
+            cost_in_credits: req.body.info.cost_in_credits,
+            length: req.body.info.length,
+            crew: req.body.info.crew,
+            max_atmosphering_speed: req.body.info.max_atmosphering_speed,
+            passengers: req.body.info.passengers,
+            cargo_capacity: req.body.info.cargo_capacity,
+            consumables: req.body.info.consumables,
+            vehicle_class: req.body.info.vehicle_class
+        }
+    })
+        // .then(handle404)
+        .then(() => res.sendStatus(204))
+        // if an error occurs, pass it to the handler
+        .catch(next)
 })
 
 router.delete('/FaveVehicles/:id', requireToken, (req, res, next) => {
-	Saved.findOneAndDelete({
-		_id: req.params.id
-	})
-		.then(deletedVehicles => {
-			res.json({ message: "Deleted Vehicles", deletedVehicles })
-		})
-		.catch(err => {
-			console.log('Failed to delete: ', err)
-		})
+    Saved.findOneAndDelete({
+        _id: req.params.id
+    })
+        .then(deletedVehicles => {
+            res.json({ message: "Deleted Vehicles", deletedVehicles })
+        })
+        .catch(err => {
+            console.log('Failed to delete: ', err)
+        })
 })
 
 router.post('/Vehicles', requireToken, (req, res, next) => {
