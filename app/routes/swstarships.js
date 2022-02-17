@@ -13,25 +13,51 @@ const Saved = require('../models/starships')
 const router = express.Router()
 
 router.get('/FaveStarships', requireToken, (req, res, next) => {
-	Saved.find()
-		.then((starships) => {
-			const userStarships = starships.filter(starships => starships.owner.toString() === req.user.id)
-			return userStarships.map((starships) => starships.toObject())
-		})
-		.then((starships) => res.status(200).json({ starships: starships }))
-		.catch(next)
+    Saved.find()
+        .then((starships) => {
+            const userStarships = starships.filter(starships => starships.owner.toString() === req.user.id)
+            return userStarships.map((starships) => starships.toObject())
+        })
+        .then((starships) => res.status(200).json({ starships: starships }))
+        .catch(next)
+})
+
+router.patch('/Starships/:id', requireToken, (req, res, next) => {
+    Saved.findOneAndUpdate({
+        "_id": req.params.id
+    }, {
+        "$set": {
+            name: req.body.info.name,
+            model: req.body.info.model,
+            manufacturer: req.body.info.manufacturer,
+            cost_in_credits: req.body.info.cost_in_credits,
+            length: req.body.info.length,
+            crew: req.body.info.crew,
+            max_atmosphering_speed: req.body.info.max_atmosphering_speed,
+            passengers: req.body.info.passengers,
+            cargo_capacity: req.body.info.cargo_capacity,
+            consumables: req.body.info.consumables,
+            starship_class: req.body.info.starship_class,
+            MGLT: req.body.info.MGLT,
+            hyperdrive_rating: req.body.info.hyperdrive_rating
+        }
+    })
+        // .then(handle404)
+        .then(() => res.sendStatus(204))
+        // if an error occurs, pass it to the handler
+        .catch(next)
 })
 
 router.delete('/FaveStarships/:id', requireToken, (req, res, next) => {
-	Saved.findOneAndDelete({
-		_id: req.params.id
-	})
-		.then(deletedStarships => {
-			res.json({ message: "Deleted Starship", deletedStarships })
-		})
-		.catch(err => {
-			console.log('Failed to delete: ', err)
-		})
+    Saved.findOneAndDelete({
+        _id: req.params.id
+    })
+        .then(deletedStarships => {
+            res.json({ message: "Deleted Starship", deletedStarships })
+        })
+        .catch(err => {
+            console.log('Failed to delete: ', err)
+        })
 })
 
 router.post('/Starships', requireToken, (req, res, next) => {

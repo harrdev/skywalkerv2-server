@@ -13,25 +13,44 @@ const Saved = require('../models/films')
 const router = express.Router()
 
 router.get('/FaveFilms', requireToken, (req, res, next) => {
-	Saved.find()
-		.then((films) => {
-			const userFilm = films.filter(film => film.owner.toString() === req.user.id)
-			return userFilm.map((film) => film.toObject())
-		})
-		.then((film) => res.status(200).json({ film: film }))
-		.catch(next)
+    Saved.find()
+        .then((films) => {
+            const userFilm = films.filter(film => film.owner.toString() === req.user.id)
+            return userFilm.map((film) => film.toObject())
+        })
+        .then((film) => res.status(200).json({ film: film }))
+        .catch(next)
+})
+
+router.patch('/Films/:id', requireToken, (req, res, next) => {
+    Saved.findOneAndUpdate({
+        "_id": req.params.id
+    }, {
+        "$set": {
+            title: req.body.info.title,
+            episode_id: req.body.info.episode_id,
+            opening_crawl: req.body.info.opening_crawl,
+            director: req.body.info.director,
+            producer: req.body.info.producer,
+            release_date: req.body.info.release_date
+        }
+    })
+        // .then(handle404)
+        .then(() => res.sendStatus(204))
+        // if an error occurs, pass it to the handler
+        .catch(next)
 })
 
 router.delete('/FaveFilms/:id', requireToken, (req, res, next) => {
-	Saved.findOneAndDelete({
-		_id: req.params.id
-	})
-		.then(deletedFilm => {
-			res.json({ message: "Deleted Film", deletedFilm })
-		})
-		.catch(err => {
-			console.log('Failed to delete: ', err)
-		})
+    Saved.findOneAndDelete({
+        _id: req.params.id
+    })
+        .then(deletedFilm => {
+            res.json({ message: "Deleted Film", deletedFilm })
+        })
+        .catch(err => {
+            console.log('Failed to delete: ', err)
+        })
 })
 
 router.post('/Films', requireToken, (req, res, next) => {
