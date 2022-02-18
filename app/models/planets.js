@@ -19,6 +19,14 @@ const planetsSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
+        films: {
+            type: Array,
+            required: false,
+        },
+        residents: {
+            type: Array,
+            required: false,
+        },
         climate: {
 			type: String,
 			required: false,

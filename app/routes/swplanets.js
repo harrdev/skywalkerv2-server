@@ -36,7 +36,9 @@ router.patch('/Planets/:id', requireToken, (req, res, next) => {
             climate: req.body.info.climate,
             gravity: req.body.info.gravity,
             surface_water: req.body.info.surface_water,
-            population: req.body.info.population
+            population: req.body.info.population,
+            films: req.body.info.films,
+            residents: req.body.info.residents
         }
     })
         // .then(handle404)
@@ -71,6 +73,8 @@ router.post('/Planets', requireToken, (req, res, next) => {
         gravity: req.body.info.gravity,
         surface_water: req.body.info.surface_water,
         population: req.body.info.population,
+        films: req.body.info.films,
+        residents: req.body.info.residents,
         owner: req.body.owner
     })
         .then(addedPlanet => {
@@ -94,6 +98,8 @@ router.post('/newPlanet/Planet', requireToken, (req, res, next) => {
         gravity: req.body.info.gravity,
         surface_water: req.body.info.surface_water,
         population: req.body.info.population,
+        films: req.body.info.films,
+        residents: req.body.info.residents,
         owner: req.body.owner
     })
         .then(addedPlanet => {
