@@ -34,7 +34,8 @@ router.patch('/Species/:id', requireToken, (req, res, next) => {
             hair_colors: req.body.info.hair_colors,
             eye_colors: req.body.info.eye_colors,
             average_lifespan: req.body.info.average_lifespan,
-            language: req.body.info.language
+            language: req.body.info.language,
+            people: req.body.info.people
         }
     })
         // .then(handle404)
@@ -68,6 +69,7 @@ router.post('/Species', requireToken, (req, res, next) => {
         eye_colors: req.body.info.eye_colors,
         average_lifespan: req.body.info.average_lifespan,
         language: req.body.info.language,
+        people: req.body.info.people,
         owner: req.body.owner
     })
         .then(addedSpecies => {
@@ -90,6 +92,7 @@ router.post('/newSpecies/Species', requireToken, (req, res, next) => {
         eye_colors: req.body.info.eye_colors,
         average_lifespan: req.body.info.average_lifespan,
         language: req.body.info.language,
+        people: req.body.info.people,
         owner: req.body.owner
     })
         .then(addedSpecies => {
