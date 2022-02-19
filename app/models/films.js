@@ -27,6 +27,10 @@ const FilmsSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
+        characters: {
+            type: Array,
+            required: false,
+        },
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

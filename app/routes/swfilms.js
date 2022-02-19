@@ -32,7 +32,8 @@ router.patch('/Films/:id', requireToken, (req, res, next) => {
             opening_crawl: req.body.info.opening_crawl,
             director: req.body.info.director,
             producer: req.body.info.producer,
-            release_date: req.body.info.release_date
+            release_date: req.body.info.release_date,
+            characters: req.body.info.characters
         }
     })
         // .then(handle404)
@@ -64,6 +65,7 @@ router.post('/Films', requireToken, (req, res, next) => {
         director: req.body.info.director,
         producer: req.body.info.producer,
         release_date: req.body.info.release_date,
+        characters: req.body.info.characters,
         owner: req.body.owner
     })
         .then(addedFilm => {
@@ -84,6 +86,7 @@ router.post('/newFilm/Film', requireToken, (req, res, next) => {
         director: req.body.info.director,
         producer: req.body.info.producer,
         release_date: req.body.info.release_date,
+        characters: req.body.info.characters,
         owner: req.body.owner
     })
         .then(addedFilm => {
