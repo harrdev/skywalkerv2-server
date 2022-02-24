@@ -42,7 +42,7 @@ const app = express()
 // 		origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}`,
 // 	})
 // )
-app.use(cors)
+app.use(cors())
 
 // define port for API to run on
 // adding PORT= to your env file will be necessary for deployment
