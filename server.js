@@ -74,6 +74,9 @@ app.use(swvehicles)
 app.use(swspecies)
 app.use(swstarships)
 app.use(swfilms)
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "build", "index.html"))
+  })
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them
