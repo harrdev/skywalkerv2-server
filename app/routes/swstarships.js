@@ -13,6 +13,7 @@ const Saved = require('../models/starships')
 const router = express.Router()
 
 router.get('/FaveStarships', requireToken, (req, res, next) => {
+    console.log("Server side API for getFave starships: ", req.body.info)
     Saved.find()
         .then((starships) => {
             const userStarships = starships.filter(starships => starships.owner.toString() === req.user.id)
