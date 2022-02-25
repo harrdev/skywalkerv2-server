@@ -5,7 +5,6 @@ const FilmsSchema = new mongoose.Schema(
 		title: {
 			type: String,
 			required: true,
-            unique: true,
 		},
 		episode_id: {
 			type: String,

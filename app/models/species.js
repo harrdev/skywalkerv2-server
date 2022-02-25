@@ -5,7 +5,6 @@ const speciesSchema = new mongoose.Schema(
 		name: {
 			type: String,
 			required: true,
-            unique: true,
 		},
 		classification: {
 			type: String,
